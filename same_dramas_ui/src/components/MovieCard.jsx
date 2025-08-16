@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './MovieCard.css';
 
 const MovieCard = ({ movie }) => {
@@ -58,7 +58,7 @@ const MovieCard = ({ movie }) => {
       alert('Failed to fetch trailer.');
     }
   };
-
+const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="movie-card">
       <div className="movie-poster">
@@ -81,9 +81,21 @@ const MovieCard = ({ movie }) => {
 
         <p className="movie-description">{movie.description}</p>
 
-        <button onClick={fetchYouTubeVideo}>
-          Watch Trailer
-        </button>
+        <button onClick={fetchYouTubeVideo} onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        background: isHovered ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
+        color: '#fff',
+        padding: '12px 24px',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        borderRadius: '8px',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease'
+      }}>
+  Watch Trailer
+</button>
       </div>
     </div>
   );
